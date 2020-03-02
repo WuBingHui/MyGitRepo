@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MainActivity</string>
+    <string name="app_name">MyGit</string>
 
     <string name="redirection_failed">網路不給力，請稍後在試</string>
 
