@@ -3,27 +3,45 @@ package com.anthony.wu.my.git.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.anthony.wu.my.git.base.BaseViewModel
 import com.anthony.wu.my.git.dto.Resource
+import com.anthony.wu.my.git.dto.request.AuthRequestBo
+import com.anthony.wu.my.git.dto.response.BasicTokenDto
+import com.anthony.wu.my.git.dto.response.ResposDto
+import com.anthony.wu.my.git.extension.addTo
+import com.anthony.wu.my.git.extension.ioToUi
+import com.anthony.wu.my.git.model.GitModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class GitViewModel : BaseViewModel(), KoinComponent {
+class GitViewModel( private val gitModel: GitModel) : BaseViewModel() {
 
-//    val onAccountCheck: MutableLiveData<Resource<AccountCheckResponse>> by lazy { MutableLiveData<Resource<AccountCheckResponse>>() }
-//
-//    fun accountCheck() {
-//
-//        val gameModel: GameModel by inject()
-//
-//        gameModel.accountCheck(Properties.getZbToken()).ioToUi().subscribe(
-//                { dto ->
-//                    if (dto.responseError == null ) {
-//                        onAccountCheck.value = Resource.success(dto)
-//                    } else {
-//                        onAccountCheck.value = Resource.error(dto.responseError.message, dto)
-//                    }
-//                }, { t: Throwable? -> onAccountCheck.value = Resource.error(t?.message, null) }
-//        ).addTo(compositeDisposable)
-//
-//    }
+    val onRespos: MutableLiveData<Resource<List<ResposDto>>> by lazy { MutableLiveData<Resource<List<ResposDto>>>() }
+
+    val onLogin: MutableLiveData<Resource<BasicTokenDto>> by lazy { MutableLiveData<Resource<BasicTokenDto>>() }
+
+    fun getRespos(userName:String) {
+
+        gitModel.getRespos(userName).ioToUi().subscribe(
+            { dto ->
+
+                    onRespos.value = Resource.success(dto)
+
+            }, { t: Throwable? -> onRespos.value = Resource.error(t?.message, null) }
+
+        ).addTo(compositeDisposable)
+
+    }
+
+    fun postLogin(authRequestBo: AuthRequestBo) {
+
+        gitModel.postLogin(authRequestBo).ioToUi().subscribe(
+            { dto ->
+
+                onLogin.value = Resource.success(dto)
+
+            }, { t: Throwable? -> onLogin.value = Resource.error(t?.message, null) }
+
+        ).addTo(compositeDisposable)
+
+    }
 
 }

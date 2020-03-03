@@ -1,6 +1,9 @@
 package com.anthony.wu.my.git.service
 
 
+import com.anthony.wu.my.git.dto.request.AuthRequestBo
+import com.anthony.wu.my.git.dto.response.BasicTokenDto
+import com.anthony.wu.my.git.dto.response.ResposDto
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Call
@@ -9,11 +12,19 @@ import java.util.*
 
 interface GitService {
 
-//    /**
-//     * 送禮物項目清單
-//     */
-//    @GET("api/room/gift/list")
-//    fun getGiftList(): Single<GiftList>
+    /**
+     * 取得倉庫清單
+     */
+    @GET("users/{userName}/repos")
+    fun getRepos(@Path("userName") userName:String ): Single<List<ResposDto>>
+
+    /**
+     * 登入
+     */
+    @POST("authorizations")
+    fun postLogin(@Body authRequestBo: AuthRequestBo): Single<BasicTokenDto>
+
+
 //
 //    /**
 //     * 送禮物

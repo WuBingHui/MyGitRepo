@@ -1,9 +1,15 @@
 package com.anthony.wu.my.git.model
 
-//class GitModel(val service: GameDetailService) {
+import com.anthony.wu.my.git.dto.request.AuthRequestBo
+import com.anthony.wu.my.git.extension.ioToUi
+import com.anthony.wu.my.git.service.GitService
+
+class GitModel(val service: GitService) {
+
+
 //
-//    fun postGameDetail(gameDetailBo: GameDetailBo) = service.postGameDetail(gameDetailBo)
-//
-//    fun postAllGame(allGameBo: GameDetailBo) = service.postAllGame(allGameBo)
-//
-//}
+    fun getRespos(userName:String) = service.getRepos(userName).ioToUi()
+
+    fun postLogin(authRequestBo: AuthRequestBo) = service.postLogin(authRequestBo).ioToUi()
+
+}
