@@ -41,6 +41,10 @@ class LoginActivity : BaseActivity() {
 
         loginBtn.setOnClickListener {
 
+        }
+
+        skip.setOnClickListener {
+
             val intent = Intent()
             intent.setClass(this, PublicRepositoriesActivity::class.java)
             startActivity(intent)

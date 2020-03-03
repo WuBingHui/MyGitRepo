@@ -33,7 +33,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="50dp"
                 android:layout_marginRight="50dp"
-                android:background="@drawable/shape_oval_grey_bg"
+                android:background="@drawable/shape_oval_blue_bg"
                 android:gravity="center"
                 android:hint="@string/account_hint"
                 android:inputType="text"
@@ -51,7 +51,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="50dp"
                 android:layout_marginRight="50dp"
-                android:background="@drawable/shape_oval_grey_bg"
+                android:background="@drawable/shape_oval_blue_bg"
                 android:gravity="center"
                 android:hint="@string/password_hint"
                 android:inputType="textPassword"
@@ -65,15 +65,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/shape_oval_white_bg"
                 android:text="@string/login"
                 android:textColor="@color/md_white_1000"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/skip"
                 app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/passwordEditText"
                 app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+
+            <TextView
+                android:id="@+id/skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/skip"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

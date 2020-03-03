@@ -3,9 +3,14 @@
 
     <string name="redirection_failed">網路不給力，請稍後在試</string>
 
-    <string name="account_hint">帳號</string>
+    <string name="account_hint">用戶名</string>
     <string name="password_hint">密碼</string>
     <string name="login">登入</string>
+
+    <string name="search">輸入欲搜尋的用戶名</string>
+
+    <string name="skip">略過</string>
+
 
     <string name="no_description">無描述</string>
     <string name="zero">0</string>

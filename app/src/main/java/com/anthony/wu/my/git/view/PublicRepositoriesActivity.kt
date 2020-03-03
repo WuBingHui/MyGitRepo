@@ -36,11 +36,6 @@ class PublicRepositoriesActivity : BaseActivity() {
 
         initViewModel()
 
-        customLoadingDialog = CustomLoadingDialog.newInstance()
-
-        customLoadingDialog?.show(supportFragmentManager, customLoadingDialog!!.tag)
-
-        viewModel.getRespos("panda850819")
 
     }
 
@@ -48,6 +43,7 @@ class PublicRepositoriesActivity : BaseActivity() {
 
     private fun  initView(){
 
+        customLoadingDialog = CustomLoadingDialog.newInstance()
 
         repositoriesAdapter = RepositoriesAdapter(this)
         val linearLayoutManager = LinearLayoutManager(this)
@@ -55,6 +51,14 @@ class PublicRepositoriesActivity : BaseActivity() {
         repositoriesRecyclerView.layoutManager = linearLayoutManager
         repositoriesRecyclerView.adapter = repositoriesAdapter
 
+
+        searchImg.setOnClickListener {
+
+            customLoadingDialog?.show(supportFragmentManager, customLoadingDialog!!.tag)
+
+            viewModel.getRespos(userName.text.toString())
+
+        }
 
     }
 
@@ -68,7 +72,7 @@ class PublicRepositoriesActivity : BaseActivity() {
                     dto.data?.let {
                         repositoriesAdapter?.update(it)
 
-                        userName.text = it[0].owner.login
+                        userName.setText(it[0].owner.login)
 
                         Glide.with(this).load(it[0].owner.avatar_url)
                             .apply(RequestOptions.bitmapTransform(CircleCrop()))
