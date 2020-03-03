@@ -1,22 +1,49 @@
 package com.anthony.wu.my.git.dto.response
 
-data class BasicTokenDto(
-    val app: App,
+data class UserInfoDto(
+    val avatar_url: String,
+    val bio: Any,
+    val blog: String,
+    val collaborators: Int,
+    val company: Any,
     val created_at: String,
-    val fingerprint: Any,
-    val hashed_token: String,
+    val disk_usage: Int,
+    val email: Any,
+    val events_url: String,
+    val followers: Int,
+    val followers_url: String,
+    val following: Int,
+    val following_url: String,
+    val gists_url: String,
+    val gravatar_id: String,
+    val hireable: Any,
+    val html_url: String,
     val id: Int,
-    val note: String,
-    val note_url: Any,
-    val scopes: List<String>,
-    val token: String,
-    val token_last_eight: String,
+    val location: Any,
+    val login: String,
+    val name: Any,
+    val node_id: String,
+    val organizations_url: String,
+    val owned_private_repos: Int,
+    val plan: Plan,
+    val private_gists: Int,
+    val public_gists: Int,
+    val public_repos: Int,
+    val received_events_url: String,
+    val repos_url: String,
+    val site_admin: Boolean,
+    val starred_url: String,
+    val subscriptions_url: String,
+    val total_private_repos: Int,
+    val two_factor_authentication: Boolean,
+    val type: String,
     val updated_at: String,
     val url: String
 )
 
-data class App(
-    val client_id: String,
+data class Plan(
+    val collaborators: Int,
     val name: String,
-    val url: String
+    val private_repos: Int,
+    val space: Int
 )

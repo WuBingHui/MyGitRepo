@@ -1,10 +1,9 @@
 package com.anthony.wu.my.git.service
 
 
-import com.anthony.wu.my.git.dto.request.AuthRequestBo
-import com.anthony.wu.my.git.dto.response.BasicTokenDto
 import com.anthony.wu.my.git.dto.response.ResposDto
 import com.anthony.wu.my.git.dto.response.UserDto
+import com.anthony.wu.my.git.dto.response.UserInfoDto
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Call
@@ -28,8 +27,8 @@ interface GitService {
     /**
      * 登入
      */
-    @POST("authorizations")
-    fun postLogin(@Body authRequestBo: AuthRequestBo): Single<BasicTokenDto>
+    @GET("user")
+    fun getUser(@Header("Authorization") authHeader: String): Single<UserInfoDto>
 
 
 //

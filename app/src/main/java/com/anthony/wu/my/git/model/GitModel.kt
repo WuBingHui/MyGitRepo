@@ -14,6 +14,6 @@ class GitModel(val service: GitService) {
 
 
 
-    fun postLogin(authRequestBo: AuthRequestBo) = service.postLogin(authRequestBo).ioToUi()
+    fun getUser(authHeader: String) = service.getUser(authHeader).ioToUi()
 
 }

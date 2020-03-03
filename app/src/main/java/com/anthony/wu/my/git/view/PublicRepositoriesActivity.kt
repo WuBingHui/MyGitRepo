@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anthony.wu.my.git.R
 import com.anthony.wu.my.git.adapter.RepositoriesAdapter
+import com.anthony.wu.my.git.adapter.UserAdapter
 import com.anthony.wu.my.git.base.BaseActivity
 import com.anthony.wu.my.git.dto.Status
 import com.anthony.wu.my.git.viewmodel.GitViewModel
@@ -67,6 +68,14 @@ class PublicRepositoriesActivity : BaseActivity() {
         repositoriesRecyclerView.layoutManager = linearLayoutManager
         repositoriesRecyclerView.adapter = repositoriesAdapter
 
+        searchOtherUser.setOnClickListener {
+
+            val intent = Intent()
+            intent.setClass(this, SearchActivity::class.java)
+            startActivity(intent)
+
+        }
+
     }
 
     private fun initViewModel(){
@@ -79,7 +88,7 @@ class PublicRepositoriesActivity : BaseActivity() {
                     dto.data?.let {
                         repositoriesAdapter?.update(it)
 
-                        userName.setText(it[0].owner.login)
+                        userName.text = it[0].owner.login
 
                         Glide.with(this).load(it[0].owner.avatar_url)
                             .apply(RequestOptions.bitmapTransform(CircleCrop()))

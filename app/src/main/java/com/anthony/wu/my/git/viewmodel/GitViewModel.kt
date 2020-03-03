@@ -3,10 +3,9 @@ package com.anthony.wu.my.git.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.anthony.wu.my.git.base.BaseViewModel
 import com.anthony.wu.my.git.dto.Resource
-import com.anthony.wu.my.git.dto.request.AuthRequestBo
-import com.anthony.wu.my.git.dto.response.BasicTokenDto
 import com.anthony.wu.my.git.dto.response.ResposDto
 import com.anthony.wu.my.git.dto.response.UserDto
+import com.anthony.wu.my.git.dto.response.UserInfoDto
 import com.anthony.wu.my.git.extension.addTo
 import com.anthony.wu.my.git.extension.ioToUi
 import com.anthony.wu.my.git.model.GitModel
@@ -17,7 +16,7 @@ class GitViewModel( private val gitModel: GitModel) : BaseViewModel() {
 
     val onRespos: MutableLiveData<Resource<List<ResposDto>>> by lazy { MutableLiveData<Resource<List<ResposDto>>>() }
 
-    val onLogin: MutableLiveData<Resource<BasicTokenDto>> by lazy { MutableLiveData<Resource<BasicTokenDto>>() }
+    val onLogin: MutableLiveData<Resource<UserInfoDto>> by lazy { MutableLiveData<Resource<UserInfoDto>>() }
 
     val onUserList: MutableLiveData<Resource<UserDto>> by lazy { MutableLiveData<Resource<UserDto>>() }
 
@@ -48,9 +47,9 @@ class GitViewModel( private val gitModel: GitModel) : BaseViewModel() {
 
     }
 
-    fun postLogin(authRequestBo: AuthRequestBo) {
+    fun getUser(authHeader: String) {
 
-        gitModel.postLogin(authRequestBo).ioToUi().subscribe(
+        gitModel.getUser(authHeader).ioToUi().subscribe(
             { dto ->
 
                 onLogin.value = Resource.success(dto)
