@@ -46,7 +46,7 @@ class LoginActivity : BaseActivity() {
         skip.setOnClickListener {
 
             val intent = Intent()
-            intent.setClass(this, PublicRepositoriesActivity::class.java)
+            intent.setClass(this, SearchActivity::class.java)
             startActivity(intent)
 
         }

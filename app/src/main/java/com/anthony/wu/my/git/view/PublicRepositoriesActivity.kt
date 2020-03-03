@@ -21,6 +21,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PublicRepositoriesActivity : BaseActivity() {
 
+    companion object{
+        private const val USER_NAME = "userName"
+
+    }
+
     private var repositoriesAdapter: RepositoriesAdapter? = null
 
     private val viewModel by viewModel<GitViewModel>()
@@ -36,9 +41,17 @@ class PublicRepositoriesActivity : BaseActivity() {
 
         initViewModel()
 
+        val intent = intent
+
+        val userName = intent.getStringExtra(USER_NAME)
+
         customLoadingDialog?.show(supportFragmentManager, customLoadingDialog!!.tag)
 
-        viewModel.getRespos("WuBingHui")
+        userName?.let {
+
+            viewModel.getRespos(userName)
+
+        }
 
     }
 

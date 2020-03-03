@@ -11,6 +11,10 @@
 
     <string name="skip">略過</string>
 
+    <string name="no_search">查無用戶</string>
+
+    <string name="not_empty">不得空白</string>
+
 
     <string name="no_description">無描述</string>
     <string name="zero">0</string>

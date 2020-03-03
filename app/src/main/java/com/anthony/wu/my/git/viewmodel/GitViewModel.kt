@@ -6,6 +6,7 @@ import com.anthony.wu.my.git.dto.Resource
 import com.anthony.wu.my.git.dto.request.AuthRequestBo
 import com.anthony.wu.my.git.dto.response.BasicTokenDto
 import com.anthony.wu.my.git.dto.response.ResposDto
+import com.anthony.wu.my.git.dto.response.UserDto
 import com.anthony.wu.my.git.extension.addTo
 import com.anthony.wu.my.git.extension.ioToUi
 import com.anthony.wu.my.git.model.GitModel
@@ -18,6 +19,9 @@ class GitViewModel( private val gitModel: GitModel) : BaseViewModel() {
 
     val onLogin: MutableLiveData<Resource<BasicTokenDto>> by lazy { MutableLiveData<Resource<BasicTokenDto>>() }
 
+    val onUserList: MutableLiveData<Resource<UserDto>> by lazy { MutableLiveData<Resource<UserDto>>() }
+
+
     fun getRespos(userName:String) {
 
         gitModel.getRespos(userName).ioToUi().subscribe(
@@ -26,6 +30,19 @@ class GitViewModel( private val gitModel: GitModel) : BaseViewModel() {
                     onRespos.value = Resource.success(dto)
 
             }, { t: Throwable? -> onRespos.value = Resource.error(t?.message, null) }
+
+        ).addTo(compositeDisposable)
+
+    }
+
+    fun getUserList(nameName:String) {
+
+        gitModel.getUserList(nameName).ioToUi().subscribe(
+            { dto ->
+
+                onUserList.value = Resource.success(dto)
+
+            }, { t: Throwable? -> onUserList.value = Resource.error(t?.message, null) }
 
         ).addTo(compositeDisposable)
 

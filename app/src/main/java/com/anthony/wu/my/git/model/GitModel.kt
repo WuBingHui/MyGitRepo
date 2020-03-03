@@ -10,6 +10,10 @@ class GitModel(val service: GitService) {
 //
     fun getRespos(userName:String) = service.getRepos(userName).ioToUi()
 
+    fun getUserList(userName:String) = service.getUserList(userName).ioToUi()
+
+
+
     fun postLogin(authRequestBo: AuthRequestBo) = service.postLogin(authRequestBo).ioToUi()
 
 }
