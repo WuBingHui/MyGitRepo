@@ -36,6 +36,9 @@ class PublicRepositoriesActivity : BaseActivity() {
 
         initViewModel()
 
+        customLoadingDialog?.show(supportFragmentManager, customLoadingDialog!!.tag)
+
+        viewModel.getRespos("WuBingHui")
 
     }
 
@@ -50,15 +53,6 @@ class PublicRepositoriesActivity : BaseActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         repositoriesRecyclerView.layoutManager = linearLayoutManager
         repositoriesRecyclerView.adapter = repositoriesAdapter
-
-
-        searchImg.setOnClickListener {
-
-            customLoadingDialog?.show(supportFragmentManager, customLoadingDialog!!.tag)
-
-            viewModel.getRespos(userName.text.toString())
-
-        }
 
     }
 
