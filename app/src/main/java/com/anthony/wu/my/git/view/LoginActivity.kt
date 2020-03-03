@@ -25,10 +25,7 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        startKoin {
-            androidContext(this@LoginActivity)
-            modules(listOf(viewModelModule, gitModule, serviceModule, repositoryModule))
-        }
+
 
 //        viewModel.getRespos("WuBingHui")
 

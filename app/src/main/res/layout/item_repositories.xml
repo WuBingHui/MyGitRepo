@@ -59,14 +59,14 @@
                 android:id="@+id/repositoryStar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:drawableStart="@drawable/ic_star"
                 android:drawableLeft="@drawable/ic_star"
                 android:drawablePadding="8dp"
                 android:gravity="center|start"
                 android:text="@string/zero"
                 app:layout_constraintEnd_toStartOf="@+id/repositoryBranch"
-                app:layout_constraintStart_toStartOf="@+id/repositoryDescription"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/repositoryDescription" />
 
             <TextView
@@ -87,13 +87,12 @@
             <TextView
                 android:id="@+id/repositoryOwner"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_person"
                 android:drawableLeft="@drawable/ic_person"
 
                 android:drawablePadding="8dp"
                 android:gravity="center|start"
-                android:text="@string/zero"
                 app:layout_constraintBottom_toBottomOf="@+id/repositoryStar"
                 app:layout_constraintEnd_toEndOf="@+id/repositoryDescription"
                 app:layout_constraintStart_toEndOf="@+id/repositoryBranch"

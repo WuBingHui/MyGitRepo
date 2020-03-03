@@ -40,7 +40,7 @@ class PublicRepositoriesActivity : BaseActivity() {
 
         customLoadingDialog?.show(supportFragmentManager, customLoadingDialog!!.tag)
 
-        viewModel.getRespos("WuBingHui")
+        viewModel.getRespos("panda850819")
 
     }
 

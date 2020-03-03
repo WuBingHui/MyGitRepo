@@ -56,7 +56,7 @@ class RepositoriesAdapter(private val context: Context) :
 
         holder.repositoryBranch.text = data.forks_count.toString()
 
-        holder.repositoryOwner.text = data.stargazers_count.toString()
+        holder.repositoryOwner.text = data.owner.login
 
         holder.repositoryName.text = data.name
 
