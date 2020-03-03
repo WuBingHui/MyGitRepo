@@ -9,10 +9,12 @@ import com.anthony.wu.my.git.dto.response.UserInfoDto
 import com.anthony.wu.my.git.extension.addTo
 import com.anthony.wu.my.git.extension.ioToUi
 import com.anthony.wu.my.git.model.GitModel
+import com.anthony.wu.my.git.utils.SharedPreferencesUtils
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class GitViewModel( private val gitModel: GitModel) : BaseViewModel() {
+
 
     val onRespos: MutableLiveData<Resource<List<ResposDto>>> by lazy { MutableLiveData<Resource<List<ResposDto>>>() }
 
@@ -52,7 +54,7 @@ class GitViewModel( private val gitModel: GitModel) : BaseViewModel() {
         gitModel.getUser(authHeader).ioToUi().subscribe(
             { dto ->
 
-                onLogin.value = Resource.success(dto)
+                onLogin.value = Resource.success(dto,authHeader)
 
             }, { t: Throwable? -> onLogin.value = Resource.error(t?.message, null) }
 

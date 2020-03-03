@@ -12,8 +12,6 @@ class GitModel(val service: GitService) {
 
     fun getUserList(userName:String) = service.getUserList(userName).ioToUi()
 
-
-
     fun getUser(authHeader: String) = service.getUser(authHeader).ioToUi()
 
 }
