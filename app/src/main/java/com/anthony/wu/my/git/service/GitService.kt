@@ -32,8 +32,8 @@ interface GitService {
     /**
      * 取得合作人列表
      */
-    @GET("/repos/{userName}/{repo}/collaborators")
-    fun getCollaborators(@Header("Authorization") authHeader: String,@Path("userName") userName:String ,@Path("repo") repo:String  ): Single<List<CollaboratorsDto>>
+    @GET("repos/{userName}/{repo}/collaborators")
+    fun getCollaborators(@Header("Authorization") authHeader: String,@Path("userName") userName:String ,@Path("repo") repo:String ): Single<List<CollaboratorsDto>>
 
     /**
      * 登入

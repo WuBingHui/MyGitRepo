@@ -10,19 +10,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anthony.wu.my.git.R
 import com.anthony.wu.my.git.dto.response.Item
-import com.anthony.wu.my.git.dto.response.ResposDto
 import com.anthony.wu.my.git.view.PublicRepositoriesActivity
-import com.anthony.wu.my.git.view.SearchActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
+import io.reactivex.Observable
+import io.reactivex.rxkotlin.Observables
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 
 
 class UserAdapter(private val context: Context) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
-    companion object{
+    private val userCallBack = BehaviorSubject.create<String>()
+
+     fun getUserCallBack(): Observable<String> = userCallBack
+
+    companion object {
         private const val USER_NAME = "userName"
+
 
     }
 
@@ -65,10 +72,7 @@ class UserAdapter(private val context: Context) :
 
         holder.itemView.setOnClickListener {
 
-            val intent = Intent()
-            intent.putExtra(USER_NAME,data.login)
-            intent.setClass(context, PublicRepositoriesActivity::class.java)
-            context.startActivity(intent)
+            userCallBack.onNext(data.login)
 
         }
 

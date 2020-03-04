@@ -9,8 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anthony.wu.my.git.R
 import com.anthony.wu.my.git.adapter.RepositoriesAdapter
+import com.anthony.wu.my.git.adapter.UserAdapter
 import com.anthony.wu.my.git.base.BaseActivity
 import com.anthony.wu.my.git.dto.Status
+import com.anthony.wu.my.git.extension.addTo
 import com.anthony.wu.my.git.utils.SharedPreferencesUtils
 import com.anthony.wu.my.git.viewmodel.GitViewModel
 import com.anthony.wu.my.git.widget.CustomLoadingDialog
@@ -37,6 +39,8 @@ class PublicRepositoriesActivity : BaseActivity() {
     private val viewModel by viewModel<GitViewModel>()
 
     private var customLoadingDialog: CustomLoadingDialog? = null
+
+    private var  searchDialogFragment:SearchDialogFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,9 +81,11 @@ class PublicRepositoriesActivity : BaseActivity() {
 
         searchOtherUser.setOnClickListener {
 
-            val intent = Intent()
-            intent.setClass(this, SearchActivity::class.java)
-            startActivity(intent)
+            searchDialogFragment = SearchDialogFragment.newInstance()
+
+            searchDialogFragment!!.show(supportFragmentManager, searchDialogFragment!!.tag)
+
+            initSubject()
 
         }
 
@@ -133,6 +139,18 @@ class PublicRepositoriesActivity : BaseActivity() {
             customLoadingDialog?.dismissAllowingStateLoss()
 
         })
+
+    }
+
+    private fun initSubject(){
+
+        searchDialogFragment?.getUserCallBack()?.subscribe { user ->
+
+            customLoadingDialog?.show(supportFragmentManager, customLoadingDialog!!.tag)
+
+            viewModel.getRespos(user)
+
+        }?.addTo(compositeDisposable)
 
     }
 

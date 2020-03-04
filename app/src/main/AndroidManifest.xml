@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".view.RepositoryActivity"></activity>
-        <activity android:name=".view.SearchActivity" />
+        <activity android:name=".view.SearchDialogFragment" />
         <activity
             android:name=".view.PublicRepositoriesActivity"
             android:theme="@style/AppTheme.NoActionBar" />

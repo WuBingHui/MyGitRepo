@@ -1,7 +1,6 @@
 package com.anthony.wu.my.git.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anthony.wu.my.git.R
 import com.anthony.wu.my.git.dto.response.CollaboratorsDto
-import com.anthony.wu.my.git.dto.response.CommitsDto
-import com.anthony.wu.my.git.dto.response.Item
-import com.anthony.wu.my.git.dto.response.ResposDto
-import com.anthony.wu.my.git.view.PublicRepositoriesActivity
-import com.anthony.wu.my.git.view.SearchActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
-import org.w3c.dom.Text
 
 
 class CollaboratorsAdapter(private val context: Context) :
