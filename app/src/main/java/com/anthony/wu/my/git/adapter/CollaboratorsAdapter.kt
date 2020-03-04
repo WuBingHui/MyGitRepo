@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anthony.wu.my.git.R
+import com.anthony.wu.my.git.dto.response.CollaboratorsDto
 import com.anthony.wu.my.git.dto.response.CommitsDto
 import com.anthony.wu.my.git.dto.response.Item
 import com.anthony.wu.my.git.dto.response.ResposDto
@@ -17,16 +18,17 @@ import com.anthony.wu.my.git.view.SearchActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
+import org.w3c.dom.Text
 
 
-class CommitsAdapter() :
-    RecyclerView.Adapter<CommitsAdapter.ViewHolder>() {
+class CollaboratorsAdapter(private val context: Context) :
+    RecyclerView.Adapter<CollaboratorsAdapter.ViewHolder>() {
 
-    private var commitsList = listOf<CommitsDto>()
+    private var collaboratorsList = listOf<CollaboratorsDto>()
 
-    fun update(commitsList: List<CommitsDto>) {
+    fun update(collaboratorsList: List<CollaboratorsDto>) {
 
-        this.commitsList = commitsList
+        this.collaboratorsList = collaboratorsList
 
         notifyDataSetChanged()
 
@@ -35,7 +37,7 @@ class CommitsAdapter() :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_commit,
+                R.layout.item_collaborator,
                 parent,
                 false
             )
@@ -44,29 +46,28 @@ class CommitsAdapter() :
 
     override fun getItemCount(): Int {
 
-        return commitsList.size
+        return collaboratorsList.size
 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val data = commitsList[position]
+        val data = collaboratorsList[position]
 
+        Glide.with(context).load(data.avatar_url)
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .placeholder(R.drawable.git_icon)
+            .into(holder.collaboratorImg)
 
-        holder.userName.text = data.commit.committer.name
-
-        holder.date.text = data.commit.committer.date
-
-        holder.message.text = data.commit.message
-
+        holder.collaboratorName.text = data.login
 
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val userName = view.findViewById<TextView>(R.id.userName)
-        val date = view.findViewById<TextView>(R.id.date)
-        val message = view.findViewById<TextView>(R.id.message)
+        val collaboratorImg = view.findViewById<ImageView>(R.id.collaboratorImg)
+        val collaboratorName = view.findViewById<TextView>(R.id.collaboratorName)
+
 
     }
 

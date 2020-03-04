@@ -32,16 +32,11 @@ class LoginActivity : BaseActivity() {
         setContentView(R.layout.activity_login)
 
 
-
-//        viewModel.getRespos("WuBingHui")
-
-//        val authRequestBo = AuthRequestBo()
-//
-//        viewModel.postLogin(authRequestBo)
-
         initView()
 
         initViewModel()
+
+        checkAuthorization()
 
     }
 
@@ -104,6 +99,22 @@ class LoginActivity : BaseActivity() {
         customLoadingDialog?.show(supportFragmentManager, customLoadingDialog!!.tag)
 
         viewModel.getUser(authHeader)
+
+    }
+
+    private fun checkAuthorization(){
+
+        sharedPreferencesUtils.getAuthorization()?.let {
+
+            if(it.isNotEmpty()){
+
+                customLoadingDialog?.show(supportFragmentManager, customLoadingDialog!!.tag)
+
+                viewModel.getUser(it)
+
+            }
+
+        }
 
     }
 

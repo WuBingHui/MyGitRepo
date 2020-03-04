@@ -74,7 +74,7 @@ class CommitsFragment  : BaseFragment(){
     private fun initView(){
 
         context?.let {
-            commitsAdapter = CommitsAdapter(it)
+            commitsAdapter = CommitsAdapter()
             val linearLayoutManager = LinearLayoutManager(it)
             linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
             commitsRecyclerView.layoutManager = linearLayoutManager
