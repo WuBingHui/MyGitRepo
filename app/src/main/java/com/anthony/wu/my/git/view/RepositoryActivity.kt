@@ -52,7 +52,7 @@ class RepositoryActivity : BaseActivity() {
 
             val tabFragment = mutableListOf<Fragment>(
                 CommitsFragment.newInstance(resposDto.owner.login,resposDto.name),
-                CollaboratorsFragment.newInstance()
+                CollaboratorsFragment.newInstance(resposDto.owner.login,resposDto.name)
             )
 
             val repositoryViewPagerAdapter =

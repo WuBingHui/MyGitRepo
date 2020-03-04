@@ -28,6 +28,8 @@ class PublicRepositoriesActivity : BaseActivity() {
 
     }
 
+    private var exitTime: Long = 0
+
     private lateinit var sharedPreferencesUtils: SharedPreferencesUtils
 
     private var repositoriesAdapter: RepositoriesAdapter? = null
@@ -132,6 +134,16 @@ class PublicRepositoriesActivity : BaseActivity() {
 
         })
 
+    }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            Toast.makeText(this, getString(R.string.exit_app), Toast.LENGTH_SHORT).show()
+            exitTime = System.currentTimeMillis()
+        } else {
+            moveTaskToBack(true)
+
+        }
     }
 
 }
