@@ -14,4 +14,8 @@ class GitModel(val service: GitService) {
 
     fun getUser(authHeader: String) = service.getUser(authHeader).ioToUi()
 
+    fun getCommits(userName:String,repo:String) = service.getCommits(userName,repo).ioToUi()
+
+    fun getCollaborators(authHeader: String,userName:String,repo:String) = service.getCollaborators(authHeader,userName,repo).ioToUi()
+
 }

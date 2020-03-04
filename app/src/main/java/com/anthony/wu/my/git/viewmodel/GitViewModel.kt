@@ -3,9 +3,7 @@ package com.anthony.wu.my.git.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.anthony.wu.my.git.base.BaseViewModel
 import com.anthony.wu.my.git.dto.Resource
-import com.anthony.wu.my.git.dto.response.ResposDto
-import com.anthony.wu.my.git.dto.response.UserDto
-import com.anthony.wu.my.git.dto.response.UserInfoDto
+import com.anthony.wu.my.git.dto.response.*
 import com.anthony.wu.my.git.extension.addTo
 import com.anthony.wu.my.git.extension.ioToUi
 import com.anthony.wu.my.git.model.GitModel
@@ -22,6 +20,9 @@ class GitViewModel( private val gitModel: GitModel) : BaseViewModel() {
 
     val onUserList: MutableLiveData<Resource<UserDto>> by lazy { MutableLiveData<Resource<UserDto>>() }
 
+    val onCommits: MutableLiveData<Resource<List<CommitsDto>>> by lazy { MutableLiveData<Resource<List<CommitsDto>>>() }
+
+    val onCollaborators: MutableLiveData<Resource<List<CollaboratorsDto>>> by lazy { MutableLiveData<Resource<List<CollaboratorsDto>>>() }
 
     fun getRespos(userName:String) {
 
@@ -57,6 +58,32 @@ class GitViewModel( private val gitModel: GitModel) : BaseViewModel() {
                 onLogin.value = Resource.success(dto,authHeader)
 
             }, { t: Throwable? -> onLogin.value = Resource.error(t?.message, null) }
+
+        ).addTo(compositeDisposable)
+
+    }
+
+    fun getCommits(userName:String,repo:String) {
+
+        gitModel.getCommits(userName,repo).ioToUi().subscribe(
+            { dto ->
+
+                onCommits.value = Resource.success(dto)
+
+            }, { t: Throwable? -> onCommits.value = Resource.error(t?.message, null) }
+
+        ).addTo(compositeDisposable)
+
+    }
+
+    fun getCollaborators(authHeader: String,userName:String,repo:String) {
+
+        gitModel.getCollaborators(authHeader,userName,repo).ioToUi().subscribe(
+            { dto ->
+
+                onCollaborators.value = Resource.success(dto)
+
+            }, { t: Throwable? -> onCollaborators.value = Resource.error(t?.message, null) }
 
         ).addTo(compositeDisposable)
 

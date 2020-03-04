@@ -55,14 +55,6 @@ class LoginActivity : BaseActivity() {
             login()
         }
 
-        skip.setOnClickListener {
-
-            val intent = Intent()
-            intent.setClass(this, SearchActivity::class.java)
-            startActivity(intent)
-
-        }
-
     }
 
     private fun initViewModel(){

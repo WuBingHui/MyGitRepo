@@ -1,5 +1,7 @@
 package com.anthony.wu.my.git.dto.response
 
+
+
 data class ResposDto(
     val archive_url: String,
     val archived: Boolean,
@@ -74,9 +76,9 @@ data class ResposDto(
     val url: String,
     val watchers: Int,
     val watchers_count: Int
-)
+):java.io.Serializable
 
-data class Owner(
+ class Owner(
     val avatar_url: String,
     val events_url: String,
     val followers_url: String,
@@ -95,4 +97,4 @@ data class Owner(
     val subscriptions_url: String,
     val type: String,
     val url: String
-)
+):java.io.Serializable

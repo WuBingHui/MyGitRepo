@@ -1,9 +1,7 @@
 package com.anthony.wu.my.git.service
 
 
-import com.anthony.wu.my.git.dto.response.ResposDto
-import com.anthony.wu.my.git.dto.response.UserDto
-import com.anthony.wu.my.git.dto.response.UserInfoDto
+import com.anthony.wu.my.git.dto.response.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Call
@@ -23,6 +21,19 @@ interface GitService {
      */
     @GET("search/users")
     fun getUserList(@Query("q") userName:String ): Single<UserDto>
+
+
+    /**
+     * 取得提交的訊息列表
+     */
+    @GET("repos/{userName}/{repo}/commits")
+    fun getCommits(@Path("userName") userName:String ,@Path("repo") repo:String  ): Single<List<CommitsDto>>
+
+    /**
+     * 取得合作人列表
+     */
+    @GET("/repos/{userName}/{repo}/collaborators")
+    fun getCollaborators(@Header("Authorization") authHeader: String,@Path("userName") userName:String ,@Path("repo") repo:String  ): Single<List<CollaboratorsDto>>
 
     /**
      * 登入

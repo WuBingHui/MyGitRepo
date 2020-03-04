@@ -1,6 +1,7 @@
 package com.anthony.wu.my.git.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anthony.wu.my.git.R
 import com.anthony.wu.my.git.dto.response.ResposDto
+import com.anthony.wu.my.git.view.LoginActivity
+import com.anthony.wu.my.git.view.PublicRepositoriesActivity
+import com.anthony.wu.my.git.view.RepositoryActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -16,6 +20,8 @@ import com.bumptech.glide.request.RequestOptions
 
 class RepositoriesAdapter(private val context: Context) :
     RecyclerView.Adapter<RepositoriesAdapter.ViewHolder>() {
+
+    private val USER_NAME = "userName"
 
     private var repositoryList = listOf<ResposDto>()
 
@@ -65,6 +71,15 @@ class RepositoriesAdapter(private val context: Context) :
         }
 
         holder.repositoryLanguage.text = data.language
+
+        holder.itemView.setOnClickListener {
+
+            val intent = Intent()
+            intent.putExtra(USER_NAME,data)
+            intent.setClass(context, RepositoryActivity::class.java)
+            context.startActivity(intent)
+
+        }
 
     }
 
