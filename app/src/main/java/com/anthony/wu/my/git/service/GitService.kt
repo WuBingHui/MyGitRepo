@@ -40,7 +40,7 @@ interface GitService {
      */
     @GET("user")
     fun getUser(@Header("Authorization") authHeader: String): Single<UserInfoDto>
-    
+
 
 }
 

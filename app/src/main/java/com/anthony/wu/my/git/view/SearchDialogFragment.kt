@@ -9,6 +9,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.anthony.wu.my.git.R
 import com.anthony.wu.my.git.adapter.UserAdapter
 import com.anthony.wu.my.git.base.BaseDialogFragment
@@ -124,6 +125,7 @@ class SearchDialogFragment : BaseDialogFragment() {
         }
 
     }
+
 
     private fun initViewModel(){
 

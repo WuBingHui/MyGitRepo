@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.core.net.toUri
 import com.anthony.wu.my.git.BuildConfig
 import com.anthony.wu.my.git.R
+import com.anthony.wu.my.git.dto.response.ErrorMessageDto
+import com.google.gson.Gson
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -86,11 +88,45 @@ class RedirectInterceptor : Interceptor {
         var response = createResponse(chain, request)
         when (response.code) {
             in 400..900 -> {
-                throw IOException(response.toString())
+                getResponseBody(response.body)?.let {
+
+                    val responseError = Gson().fromJson(it, ErrorMessageDto::class.java).message
+
+                    throw IOException(responseError)
+
+                }
             }
         }
 
         return response
+
+    }
+
+    private fun getResponseBody(responseBody: ResponseBody?): String? {
+
+        var body: String? = null
+
+        responseBody?.let {
+
+            val contentLength = responseBody.contentLength()
+
+            if (contentLength != 0L) {
+
+                val source = responseBody.source()
+                source.request(Integer.MAX_VALUE.toLong()) // Buffer the entire body.
+                val buffer = source.buffer
+
+                var charset: Charset? = Charset.forName("UTF-8")
+                val contentType = responseBody.contentType()
+                if (contentType != null) {
+                    charset = contentType.charset(Charset.forName("UTF-8"))
+                }
+
+                body = buffer.clone().readString(charset!!)
+            }
+        }
+
+        return body
 
     }
 }
